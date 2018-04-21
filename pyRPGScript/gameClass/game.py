@@ -49,22 +49,23 @@ class Person:
         print("Remaining MP:", self.mp, "/", self.maxMp)
         print("Choose Magic to Attack: ")
         for spells in self.magic:
-            print(iterate, ":", bColors.BOLD + bColors.OKGREEN + spells["name"] + bColors.ENDC, "dmg:", bColors.BOLD +
-                  bColors.FAIL + str(spells["damage"]) + bColors.ENDC)
+            if spells.damage > 0:
+                print(iterate, ":", bColors.BOLD + bColors.OKGREEN + spells.name + bColors.ENDC, "dmg:", bColors.BOLD +
+                      bColors.FAIL + str(spells.damage) + bColors.ENDC)
+            else:
+                print(iterate, ":", bColors.BOLD + bColors.OKGREEN + spells.name + bColors.ENDC, "heal:", bColors.BOLD +
+                      bColors.FAIL + str(spells.healing) + bColors.ENDC)
             iterate += 1
 
-    def get_magic_damage(self, i):
-        magic_damage_min = int(self.magic[i]["damage"]) - 10
-        magic_damage_max = int(self.magic[i]["damage"]) + 10
-        return random.randrange(magic_damage_min, magic_damage_max)
-
-    def get_magic_cost(self, i):
-        return self.magic[i]["cost"]
-
-    def get_magic_name(self, i):
-        return self.magic[i]["name"]
+    def get_magic_class(self, i):
+        return self.magic[i]
 
     def take_manacost(self, cost):
         self.mp -= cost
         if self.mp < 0:
             self.mp = 0
+
+    def take_healing(self, healing):
+        self.hp += healing
+        if self.hp > self.maxHp:
+            self.hp = self.maxHp
