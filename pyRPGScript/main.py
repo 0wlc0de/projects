@@ -14,7 +14,7 @@ Player2 = Person(EnemyName[random.randrange(0, len(EnemyName))], 500, 100, 150, 
 
 def damage_message(Attacker, Defender, generated_damage, attack_name):
     print(bColors.OKBLUE + Attacker.get_name() + bColors.ENDC, "uses",
-          bColors.OKGREEN + attack_name + bColors.ENDC,
+          bColors.OKGREEN + attack_name + bColors.ENDC, "on",
           bColors.WARNING + Defender.get_name() + bColors.ENDC, "!!! damage output:", generated_damage,
           bColors.WARNING + Defender.get_name() + bColors.ENDC, "remaining HP: ",
           bColors.FAIL + str(Defender.hp) + bColors.ENDC, "/", bColors.FAIL + str(Defender.maxHp) + bColors.ENDC)
@@ -38,7 +38,7 @@ while runningGame:
         chooseMagic = int(input("Choose Magic Attack: ")) - 1
         generatedDamage = Player1.get_magic_damage(chooseMagic)
         if Player1.mp < Player1.get_magic_cost(chooseMagic):
-            print("Low on MP! Please Choose another Action.")
+            print(bColors.BOLD + bColors.FAIL + "Low on MP! Please Choose another Action." + bColors.ENDC)
             continue
         else:
             Player2.take_damage(generatedDamage)
@@ -48,6 +48,11 @@ while runningGame:
         print(Player1.get_name(), ": ", bColors.BOLD + bColors.FAIL + "Invalid Choice of Action" + bColors.ENDC)
         continue
 
+    if Player2.hp == 0:
+        print(bColors.OKBLUE + bColors.BOLD + "You Win! Congratulations! " + bColors.ENDC)
+        runningGame = False
+        break
+
     generatedDamage = Player2.generate_damage()
     Player1.take_damage(generatedDamage)
     damage_message(Player2, Player1, generatedDamage, "Normal Attack")
@@ -55,9 +60,7 @@ while runningGame:
     if Player1.hp == 0:
         print(bColors.FAIL + bColors.BOLD + "You Lost to " + Player2.get_name() + ". Please Try Again." + bColors.ENDC)
         runningGame = False
-    elif Player2.hp == 0:
-        print(bColors.OKBLUE + bColors.BOLD + "You Win! Congratulations! " + bColors.ENDC)
-        runningGame = False
+
 
 
 
