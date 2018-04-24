@@ -1,5 +1,18 @@
 from math import pow
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
 # Mathematical Equations for Simple Linear Regression Model
+
+
+def get_headers(dataframe):
+    """
+    Get the headers name of the dataframe
+    :param dataframe:
+    :return:
+    """
+    return dataframe.columns.values
 
 
 # calculate the average of the data_set or samples
@@ -31,6 +44,41 @@ def co_variance(x, y):
     return cov/(len(x)-1)
 
 
-# Sample data_set
-array = [10, 20, 30, 40, 50]
+# 1: To get the Coefficient (b1) => divide the covariance of (X, Y) to the variance of (X)
+# 2: To get the Constant (b0) => multiply the b1 (Constant) and the mean of X then minus the mean of Y
+def calculate_b0_b1(X, y):
+    b1 = co_variance(X, y) / float(variance(X))
+    b0 = mean(y) - (b1 * mean(X))
+    return b0, b1
+
+
+# Simple Linear Regression equation
+def predict_target_value(x, b0, b1):
+    """
+    Calculating the target (y) value using the input x and the coefficients b0, b1
+    :param x:
+    :param b0:
+    :param b1:
+    :return:
+    """
+    return b0 + b1 * x
+
+
+# Root Mean Square Error
+def cal_rmse(actual_readings, predicted_readings):
+    """
+    Calculating the root mean square error
+    :param actual_readings:
+    :param predicted_readings:
+    :return:
+    """
+    square_error_total = 0.0
+    total_readings = len(actual_readings)
+    for i in range(0, total_readings):
+        error = predicted_readings[i] - actual_readings[i]
+        square_error_total += pow(error, 2)
+    rmse = square_error_total / float(total_readings)
+    return rmse
+
+
 
