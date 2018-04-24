@@ -3,6 +3,8 @@
 """
 
 from math import pow
+from sklearn.model_selection import train_test_split
+import pandas as pd
 import matplotlib.pyplot as plt
 # Mathematical Equations for Simple Linear Regression Model
 
@@ -49,16 +51,23 @@ def b0(x, y, b1):
 
 
 # Sample Data Sets
-array_x = [1, 2, 3, 4, 5]
-array_y = [2, 4, 5, 4, 5]
+data_set = pd.read_csv('C:\\Users\\User\\PycharmProjects\\projects\\'
+                       'pySimpleLinearRegression\\Resources\\Salary_Data.csv')
+array_x = data_set.iloc[:, :-1].values
+array_y = data_set.iloc[:, 1].values
 
-b1_ = b1(array_x, array_y)
-b0_ = b0(array_x, array_y, b1(array_x, array_y))
-slope = [predict_target_value(i, b0_, b1_) for i in array_x]
+# setting the train and test sets of X and Y
+
+X_train, X_test, y_train, y_test = train_test_split(array_x, array_y,
+                                                    test_size=0.2, random_state=0)
+b1_ = b1(X_train, y_train)
+b0_ = b0(X_train, y_train, b1(X_train, y_train))
+slope = [predict_target_value(i, b0_, b1_) for i in X_train]
 
 
-plt.scatter(array_x, array_y, color='red')
-plt.plot(array_x, slope, color='blue')
+plt.scatter(X_test, y_test, color='red')
+plt.plot(X_train, slope, color='blue')
+plt.title("Simple Linear Regression Without Library")
 plt.show()
 
 
