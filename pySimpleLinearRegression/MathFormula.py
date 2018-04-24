@@ -1,18 +1,10 @@
+"""
+    SIMPLE LINEAR REGRESSION USING ORDERED SQUARED METHOD
+"""
+
 from math import pow
 import matplotlib.pyplot as plt
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
 # Mathematical Equations for Simple Linear Regression Model
-
-
-def get_headers(dataframe):
-    """
-    Get the headers name of the dataframe
-    :param dataframe:
-    :return:
-    """
-    return dataframe.columns.values
 
 
 # calculate the average of the data_set or samples
@@ -21,6 +13,59 @@ def mean(data_set):
     return sum_all/len(data_set)
 
 
+# Simple Linear Regression equation
+def predict_target_value(x, b0, b1):
+    """
+    Calculating the target (y) value using the input x and the coefficients b0, b1
+    :param x:
+    :param b0:
+    :param b1:
+    :return:
+    """
+    return b0 + b1 * x
+
+
+def b1(x, y):
+    mean_x = mean(array_x)
+    mean_y = mean(array_y)
+    summation = 0
+    for i in range(0, len(x)):
+        summation += (x[i] - mean_x)*(y[i] - mean_y)
+
+    return summation / x_squared(x)
+
+
+def x_squared(x):
+    mean_x = mean(x)
+    summation = 0.0
+    for i in x:
+        summation += pow(i - mean_x, 2)
+    return summation
+
+
+def b0(x, y, b1):
+    b0 = mean(y) - (b1*mean(x))
+    return b0
+
+
+# Sample Data Sets
+array_x = [1, 2, 3, 4, 5]
+array_y = [2, 4, 5, 4, 5]
+
+b1_ = b1(array_x, array_y)
+b0_ = b0(array_x, array_y, b1(array_x, array_y))
+slope = [predict_target_value(i, b0_, b1_) for i in array_x]
+
+
+plt.scatter(array_x, array_y, color='red')
+plt.plot(array_x, slope, color='blue')
+plt.show()
+
+
+# Other Equation for getting the covariance and variance
+# Commented because we've implemented the short-cut method.
+# Use these formulas if you want to calculate first the variance and the covariance
+"""
 #  1: Calculate the mean
 #  2: Summation of every element in data_set minus mean and squared the answer
 def variance(data_set):
@@ -50,35 +95,5 @@ def calculate_b0_b1(X, y):
     b1 = co_variance(X, y) / float(variance(X))
     b0 = mean(y) - (b1 * mean(X))
     return b0, b1
-
-
-# Simple Linear Regression equation
-def predict_target_value(x, b0, b1):
-    """
-    Calculating the target (y) value using the input x and the coefficients b0, b1
-    :param x:
-    :param b0:
-    :param b1:
-    :return:
-    """
-    return b0 + b1 * x
-
-
-# Root Mean Square Error
-def cal_rmse(actual_readings, predicted_readings):
-    """
-    Calculating the root mean square error
-    :param actual_readings:
-    :param predicted_readings:
-    :return:
-    """
-    square_error_total = 0.0
-    total_readings = len(actual_readings)
-    for i in range(0, total_readings):
-        error = predicted_readings[i] - actual_readings[i]
-        square_error_total += pow(error, 2)
-    rmse = square_error_total / float(total_readings)
-    return rmse
-
-
+"""
 
