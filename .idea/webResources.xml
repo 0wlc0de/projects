@@ -6,6 +6,8 @@
         <entryData>
           <resourceRoots>
             <path value="file://$PROJECT_DIR$/Resources" />
+            <path value="file://$PROJECT_DIR$/MissingData/Resources" />
+            <path value="file://$PROJECT_DIR$/pySimpleLinearRegression/Resources" />
           </resourceRoots>
         </entryData>
       </entry>
