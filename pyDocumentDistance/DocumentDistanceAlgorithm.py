@@ -42,6 +42,8 @@ def dotProduct(dictA, dictB):
 # the calculation base on MIT OpenCourseWare
 # arccos(|L1| * |L2| / sqrt of (|L1| * |L1|)*(|L2| * |L2|))
 # then return it
+
+# The result will be 0.0 if it is identical and if not: the maximum result will 1.50... :D
 def document_distance_equation(dictA, dictB):
     innerProduct = dotProduct(dictA, dictB)
     base = sqrt(dotProduct(dictA, dictA) * dotProduct(dictB, dictB))
