@@ -1,5 +1,6 @@
 """
     SIMPLE LINEAR REGRESSION USING ORDERED SQUARED METHOD
+
 """
 
 from math import pow
@@ -10,21 +11,14 @@ import matplotlib.pyplot as plt
 
 
 # calculate the average of the data_set or samples
-def mean(data_set):
-    sum_all = sum(data_set)
-    return sum_all/len(data_set)
+def mean(dataset_):
+    sum_all = sum(dataset_)
+    return sum_all/len(dataset_)
 
 
 # Simple Linear Regression equation
-def predict_target_value(x, b0, b1):
-    """
-    Calculating the target (y) value using the input x and the coefficients b0, b1
-    :param x:
-    :param b0:
-    :param b1:
-    :return:
-    """
-    return b0 + b1 * x
+def predict_target_value(x, b0__, b1__):
+    return b0__ + b1__ * x
 
 
 def b1(x, y):
@@ -45,9 +39,9 @@ def x_squared(x):
     return summation
 
 
-def b0(x, y, b1):
-    b0 = mean(y) - (b1*mean(x))
-    return b0
+def b0(x, y, b1__):
+    _b0_ = mean(y) - (b1__ * mean(x))
+    return _b0_
 
 
 # Sample Data Sets
@@ -57,14 +51,15 @@ array_x = data_set.iloc[:, :-1].values
 array_y = data_set.iloc[:, 1].values
 
 # setting the train and test sets of X and Y
-
 X_train, X_test, y_train, y_test = train_test_split(array_x, array_y,
                                                     test_size=0.2, random_state=0)
+
+# Calculating the b1, b0 for prediction
 b1_ = b1(X_train, y_train)
 b0_ = b0(X_train, y_train, b1(X_train, y_train))
 slope = [predict_target_value(i, b0_, b1_) for i in X_train]
 
-
+# Visualization of the Data using pyplot
 plt.scatter(X_test, y_test, color='red')
 plt.plot(X_train, slope, color='blue')
 plt.title("Simple Linear Regression Without Library")
@@ -105,4 +100,3 @@ def calculate_b0_b1(X, y):
     b0 = mean(y) - (b1 * mean(X))
     return b0, b1
 """
-
