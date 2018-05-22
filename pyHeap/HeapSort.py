@@ -16,7 +16,7 @@ class HeapSort:
     def Max_Heapify(self, i, heap_size):
         l = 2 * i + 1
         r = 2 * i + 2
-        if l < heap_size and self.A[l] > self.A[i]:
+        if l < heap_size - 1 and self.A[l] > self.A[i]:
             largest = l
         else:
             largest = i
@@ -63,6 +63,6 @@ class HeapSort:
         print("Sorted Array : ", self.A)
 
 
-x_array = [11, 23, 42, 45, 6, 12, 7, 100]
+x_array = [11, 23, 42, 45, 6, 12, 7, 100, 1, 23, 42, 45, 6, 12, 7, 10]
 heapSort = HeapSort(x_array)
 heapSort.sort()
