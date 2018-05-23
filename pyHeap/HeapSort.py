@@ -63,6 +63,7 @@ class HeapSort:
         print("Sorted Array : ", self.A)
 
 
+# Init Data
 x_array = [11, 23, 42, 45, 6, 12, 7, 100, 1, 23, 42, 45, 6, 12, 7, 10]
 heapSort = HeapSort(x_array)
 heapSort.sort()
