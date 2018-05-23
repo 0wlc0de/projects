@@ -26,7 +26,7 @@ class HeapSort:
             swapValue = self.A[i]
             self.A[i] = self.A[largest]
             self.A[largest] = swapValue
-            self.Max_Heapify(largest, self.heap_size)
+            self.Max_Heapify(largest, heap_size)
 
     # Building Max heap in the first step
     def Build_Max_Heap(self):
