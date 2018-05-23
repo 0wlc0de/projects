@@ -48,7 +48,10 @@ class Node:
 
 
 BST = Node(10)
-BST.insert_node(11)
+BST.insert_node(7)
+BST.insert_node(8)
+BST.insert_node(9)
 BST.insert_node(13)
 print(BST.search_val(13))
 print("The right Child key is : ", BST.get_right_child().key)
+print(BST.sort())
